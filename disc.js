@@ -18,7 +18,7 @@ const distube = new DisTube(client, {
     searchCooldown: 30,
     leaveOnEmpty: true,
     leaveOnFinish: true,
-    leaveOnStop: false,
+    leaveOnStop: true,
 })
 
 // Login to Discord with your client's token
