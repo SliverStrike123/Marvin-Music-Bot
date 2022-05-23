@@ -16,8 +16,8 @@ const { DisTube } = require('distube')
 const distube = new DisTube(client, {
     searchSongs: 5,
     searchCooldown: 30,
-    leaveOnEmpty: false,
-    leaveOnFinish: false,
+    leaveOnEmpty: true,
+    leaveOnFinish: true,
     leaveOnStop: false,
 })
 
