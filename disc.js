@@ -151,13 +151,15 @@ const status = queue =>
 
 // DisTube event listeners, more in the documentation page
 distube
-    .on('playSong', (queue, song) =>
-        queue.textChannel?.send(
+    .on('playSong', (queue, song) => {
+        if(queue.repeatMode === 1 || 2) return
+        else {
+            queue.textChannel?.send(
             `Playing \`${song.name}\` - \`${
                 song.formattedDuration
-            }\`\nRequested by: ${song.user}\n${status(queue)}`,
-        ),
-    )
+            }\`\nRequested by: ${song.user}\n${status(queue)}`
+        )}
+        })
     .on('addSong', (queue, song) =>
         queue.textChannel?.send(
             `Added ${song.name} - \`${song.formattedDuration}\` to the queue by ${song.user}`,
