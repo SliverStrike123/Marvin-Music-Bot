@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "@discordjs/builders": "^0.13.0",
+    "@discordjs/rest": "^0.4.1",
+    "@discordjs/voice": "^0.9.0",
+    "discord-api-types": "^0.32.1",
+    "discord.js": "^13.7.0",
+    "distube": "^3.3.4",
+    "ffmpeg": "^0.0.4",
+    "libsodium-wrappers": "^0.7.10",
+    "opusscript": "^0.0.8",
+    "python": "^0.0.4"
+  }
+}
