@@ -1,5 +1,5 @@
 // Require the necessary discord.js classes
-const { Client, Intents, MessageEmbed } = require('discord.js');
+const { Client, Intents, MessageEmbed, DMChannel } = require('discord.js');
 
 const prefix = '!'
 
@@ -7,7 +7,8 @@ const prefix = '!'
 const client = new Client({ intents: [
 	Intents.FLAGS.GUILDS,
 	Intents.FLAGS.GUILD_MESSAGES,
-	Intents.FLAGS.GUILD_VOICE_STATES
+	Intents.FLAGS.GUILD_VOICE_STATES,
+    Intents.FLAGS.DIRECT_MESSAGES
 ]});
 
 const { DisTube } = require('distube')
@@ -171,8 +172,10 @@ distube
     )
     .on('error', (textChannel, e) => {
         console.error(e)
-        textChannel.send(
-            'An error encountered')
+        textChannel.send('An error encountered')
+        client.users.fetch('226298201773178884').then((user) => {
+            user.send(`${e.message.slice(0, 2000)}`)
+        })
     })
     .on('finish', queue => queue.textChannel?.send('Finish queue!'))
     .on('finishSong', queue =>
