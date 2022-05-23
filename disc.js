@@ -178,9 +178,11 @@ distube
         })
     })
     .on('finish', queue => queue.textChannel?.send('Finish queue!'))
-    .on('finishSong', queue =>
-        queue.textChannel?.send('Finish song!'),
-    )
+    .on('finishSong', queue => {
+        if(queue.repeatMode === 1 || 2) return
+    
+        else { queue.textChannel?.send('Finish song!') }
+    })
     .on('disconnect', queue =>
         queue.textChannel?.send('Disconnected!'),
     )
