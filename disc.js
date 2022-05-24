@@ -22,7 +22,7 @@ const distube = new DisTube(client, {
 })
 
 // Login to Discord with your client's token
-client.login("ODk3ODcwNTQ5NTgwMTM2NDU4.G09FhQ.wpIE5vyXscM8wWeEtY1Fp5XHO5Nzcnawq-3ZVk");
+client.login(process.env.DJStoken);
 
 client.on('ready', client => {
     console.log(`Logged in as ${client.user.tag}!`)
