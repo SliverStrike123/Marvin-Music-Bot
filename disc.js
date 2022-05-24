@@ -22,7 +22,7 @@ const distube = new DisTube(client, {
 })
 
 // Login to Discord with your client's token
-client.login(process.env.DJStoken);
+client.login("ODk3ODcwNTQ5NTgwMTM2NDU4.G09FhQ.wpIE5vyXscM8wWeEtY1Fp5XHO5Nzcnawq-3ZVk");
 
 client.on('ready', client => {
     console.log(`Logged in as ${client.user.tag}!`)
@@ -65,6 +65,8 @@ client.on('messageCreate', message => {
                 textChannel: message.channel,
                 member: message.member,
             })
+            
+        
         } else {
             message.channel.send(
                 'You must join a voice channel first.',
@@ -151,16 +153,28 @@ const status = queue =>
 
 // DisTube event listeners, more in the documentation page
 distube
+    .on('initQueue', queue => {
+        queue.autoplay === false
+        queue.volume === 100
+        queue.repeatMode === 0
+    })
     .on('playSong', (queue, song) => {
-        if(queue.repeatMode === 1 || 2) return
-        else {
-            console.log(queue.duration)
-            
-            queue.textChannel?.send(
-            `Playing \`${song.name}\` - \`${
-                song.formattedDuration
-            }\`\nRequested by: ${song.user}\n${status(queue)}`
-        )}
+
+        switch(queue.repeatMode) {
+            case 0:
+                queue.textChannel?.send(
+                    `Playing \`${song.name}\` - \`${
+                        song.formattedDuration
+                    }\`\nRequested by: ${song.user}\n${status(queue)}`
+                )
+                break;
+            case 1: 
+                console.log(queue.repeatMode)
+                break;
+            case 2: 
+                console.log(queue.repeatMode)
+                break;
+        }
         })
     .on('addSong', (queue, song) =>
         queue.textChannel?.send(
@@ -182,13 +196,7 @@ distube
         })
     })
     .on('finish', queue => queue.textChannel?.send('Finish queue!'))
-    .on('finishSong', queue => {
-        if(queue.repeatMode === 1 || 2) return
-    
-        else {
-            queue.textChannel?.send('Finish song!')
-        }
-    })
+ 
     .on('disconnect', queue =>
         queue.textChannel?.send('Disconnected!'),
     )
@@ -197,10 +205,7 @@ distube
             'The voice channel is empty! Leaving the voice channel...',
         ),
     )
-    .on('initQueue', queue => {
-        queue.autoplay = false
-        queue.volume = 100
-    })
+    
     // DisTubeOptions.searchSongs > 1
     .on('searchResult', (message, result) => {
         let i = 0
