@@ -154,6 +154,8 @@ distube
     .on('playSong', (queue, song) => {
         if(queue.repeatMode === 1 || 2) return
         else {
+            console.log(queue.duration)
+            
             queue.textChannel?.send(
             `Playing \`${song.name}\` - \`${
                 song.formattedDuration
@@ -183,7 +185,9 @@ distube
     .on('finishSong', queue => {
         if(queue.repeatMode === 1 || 2) return
     
-        else { queue.textChannel?.send('Finish song!') }
+        else {
+            queue.textChannel?.send('Finish song!')
+        }
     })
     .on('disconnect', queue =>
         queue.textChannel?.send('Disconnected!'),
