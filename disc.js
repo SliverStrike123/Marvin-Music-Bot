@@ -162,11 +162,18 @@ distube
 
         switch(queue.repeatMode) {
             case 0:
-                queue.textChannel?.send(
+                console.log(song.duration)
+                queue.textChannel.send(
                     `Playing \`${song.name}\` - \`${
-                        song.formattedDuration
-                    }\`\nRequested by: ${song.user}\n${status(queue)}`
-                )
+                        queue.formattedCurrentTime} - ${song.formattedDuration}
+                        \`\nRequested by: ${song.user}\n${status(queue)}`
+                ).then((sentMessage) => {
+                for(i=0; i<=song.duration; i++){
+                    sentMessage.edit(`Playing \`${song.name}\` - \`${
+                        queue.formattedCurrentTime} - ${song.formattedDuration}
+                        \`\nRequested by: ${song.user}\n${status(queue)}`)
+                }
+            })
                 break;
             case 1: 
                 console.log(queue.repeatMode)
